@@ -1,0 +1,44 @@
+{
+  "name": "vecode/caldera-http",
+  "description": "HTTP message and factory implementation, part of Vecode Caldera",
+  "version": "1.0",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "biohzrdmx",
+      "email": "hi@biohzrdmx.me",
+      "homepage": "https://biohzrdmx.me"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "ext-mbstring": "*",
+    "psr/http-message": "^1.0",
+    "psr/http-factory": "^1.0",
+    "psr/http-server-handler": "^1.0",
+    "psr/http-server-middleware": "^1.0"
+  },
+  "require-dev": {
+    "vecode/caldera-container": "^1.0"
+  },
+  "autoload": {
+    "files": [
+      "src/functions.php"
+    ],
+    "psr-4": {
+      "Caldera\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Caldera\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "analyse": "phpstan analyse --configuration phpstan.neon --memory-limit 1G --level 7 src",
+    "coverage": "phpunit --coverage-text",
+    "test": "phpunit --testdox"
+  },
+  "minimum-stability": "stable"
+}
