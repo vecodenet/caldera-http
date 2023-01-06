@@ -1,7 +1,7 @@
 {
   "name": "vecode/caldera-http",
   "description": "HTTP message and factory implementation, part of Vecode Caldera",
-  "version": "1.1",
+  "version": "1.2",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -17,7 +17,8 @@
     "psr/http-message": "^1.0",
     "psr/http-factory": "^1.0",
     "psr/http-server-handler": "^1.0",
-    "psr/http-server-middleware": "^1.0"
+    "psr/http-server-middleware": "^1.0",
+    "psr/http-client": "^1.0"
   },
   "require-dev": {
     "vecode/caldera-container": "^1.0"
