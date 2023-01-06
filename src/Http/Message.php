@@ -55,7 +55,7 @@ abstract class Message implements MessageInterface {
 	/**
 	 * Return an instance with the specified HTTP protocol version
 	 * @param  string $version HTTP protocol version
-	 * @return Message
+	 * @return static
 	 */
 	public function withProtocolVersion($version) {
 		if ($this->protocol === $version) {
@@ -110,7 +110,7 @@ abstract class Message implements MessageInterface {
 	 * Return an instance with the provided value replacing the specified header
 	 * @param  string  $name Case-insensitive header field name
 	 * @param  mixed   $value Header value(s)
-	 * @return Message
+	 * @return static
 	 */
 	public function withHeader($name, $value) {
 		$this->assertHeader($name);
@@ -129,7 +129,7 @@ abstract class Message implements MessageInterface {
 	 * Return an instance with the specified header appended with the given value
 	 * @param  string  $name Case-insensitive header field name to add
 	 * @param  mixed   $value Header value(s)
-	 * @return Message
+	 * @return static
 	 */
 	public function withAddedHeader($name, $value) {
 		if ( !is_string($name) || '' === $name ) {
@@ -143,7 +143,7 @@ abstract class Message implements MessageInterface {
 	/**
 	 * Return an instance without the specified header
 	 * @param  string  $name Case-insensitive header field name to remove
-	 * @return Message
+	 * @return static
 	 */
 	public function withoutHeader($name) {
 		$name = strtolower($name);
@@ -170,7 +170,7 @@ abstract class Message implements MessageInterface {
 	/**
 	 * Return an instance with the specified message body
 	 * @param  StreamInterface $body Body
-	 * @return Message
+	 * @return static
 	 */
 	public function withBody(StreamInterface $body) {
 		if (! $body instanceof StreamInterface ) {
