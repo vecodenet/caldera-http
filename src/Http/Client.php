@@ -11,14 +11,15 @@ declare(strict_types = 1);
 
 namespace Caldera\Http;
 
+use CURLFile;
+use RuntimeException;
+
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 use Caldera\Http\Response;
 use Caldera\Http\Stream;
-use CURLFile;
-use RuntimeException;
 
 class Client implements ClientInterface {
 
@@ -384,10 +385,14 @@ class Client implements ClientInterface {
 			} else {
 				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($request->getMethod()));
 			}
+			$body = $request->getBody();
+			if ( $body->getSize() > 0 && $body->isSeekable() ) {
+				$body->rewind();
+			}
 			if ($this->files) {
 				# Request has files, send them directly
 				$fields = [];
-				parse_str($request->getBody()->getContents(), $fields);
+				parse_str($body->getContents(), $fields);
 				foreach ($this->files as $name => $file) {
 					$title = pathinfo($file, PATHINFO_BASENAME);
 					$mime = mime_content_type($file) ?: null;
@@ -396,7 +401,7 @@ class Client implements ClientInterface {
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 			} else {
 				# Request hasn't files, just send the body
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getBody()->getContents());
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $body->getContents());
 			}
 		}
 		# File download

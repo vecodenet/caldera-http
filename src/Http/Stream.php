@@ -241,7 +241,7 @@ class Stream implements StreamInterface {
 		if (! $this->writable ) {
 			throw new RuntimeException('Cannot write to a non-writable stream');
 		}
-		$this->size = 0;
+		$this->size = null;
 		if (false === $result = fwrite($this->stream, $string)) {
 			throw new RuntimeException('Unable to write to stream');
 		}
