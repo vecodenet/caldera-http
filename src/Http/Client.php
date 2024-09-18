@@ -72,6 +72,12 @@ class Client implements ClientInterface {
 	protected $files;
 
 	/**
+	 * cURL options array
+	 * @var array
+	 */
+	protected $curlopts;
+
+	/**
 	 * Constructor
 	 * @param array $options Options array
 	 */
@@ -84,6 +90,7 @@ class Client implements ClientInterface {
 		$this->referer = $options['referer'] ?? '';
 		$this->download = $options['download'] ?? '';
 		$this->files = $options['files'] ?? '';
+		$this->curlopts = $options['curlopts'] ?? [];
 		# Try to load the cainfo path from php.ini
 		$this->cainfo = $this->cainfo ? $this->cainfo : (ini_get('curl.cainfo') ?: null);
 		$this->cainfo = $this->cainfo ? $this->cainfo : (ini_get('openssl.cafile') ?: null);
@@ -345,6 +352,7 @@ class Client implements ClientInterface {
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, $this->redirect);
+		curl_setopt_array($ch, $this->curlopts ? $this->curlopts : []);
 		# Add headers
 		$headers = $request->getHeaders();
 		if ($headers) {
@@ -453,5 +461,6 @@ class Client implements ClientInterface {
 		$this->referer    = $options['referer']    ?? $this->referer;
 		$this->download   = $options['download']   ?? $this->download;
 		$this->files      = $options['files']      ?? $this->files;
+		$this->curlopts   = $options['curlopts']   ?? $this->curlopts;
 	}
 }

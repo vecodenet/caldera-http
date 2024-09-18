@@ -1,7 +1,7 @@
 {
   "name": "vecode/caldera-http",
   "description": "HTTP message and factory implementation, part of Vecode Caldera",
-  "version": "1.3",
+  "version": "1.4",
   "type": "library",
   "license": "MIT",
   "authors": [

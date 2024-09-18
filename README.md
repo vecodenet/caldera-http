@@ -8,4 +8,4 @@
 
 HTTP message interface, handlers and factories implementation, part of Vecode Caldera
 
-Copyright &copy; 2022 Vecode. All Rights Reserved.
+Copyright &copy; 2024 Vecode. All Rights Reserved.
