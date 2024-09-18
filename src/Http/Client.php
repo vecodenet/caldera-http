@@ -434,7 +434,7 @@ class Client implements ClientInterface {
 		$response_body = curl_exec($ch);
 		$response_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$response = new Response($response_status);
-		$response = $response->withBody( new Stream(($this->download && $resource) ? '' : $response_body) );
+		$response = $response->withBody( new Stream(($this->download && $resource) ? '' : ($response_body ?: '')) );
 		if ($response_headers) {
 			foreach ($response_headers as $key => $value) {
 				$response = $response->withHeader($key, $value);
